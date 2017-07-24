@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>User Ajax Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+  <h1>Demo 1 - JSON VS HTML</h1>
+  <button id="button_json" class="w3-btn">Fetch HttpResponse from user/login/all.json</button>
+  <button id="button_html" class="w3-btn">Fetch HttpResponse from user/login/all.html</button>
+  <div id="placeholder1" class="w3-container">Placeholder for the Ajax Response
+  </div>
+
+  <hr>
+
+  <h1>Demo 2 - Ajax Form</h1>
+  <form action="/first_app/find" method='post' class='ajax_form'>
+Find all users whose first name starts with
+{% csrf_token %}
+<input type="text" name="first_name_starts_with" id="ajax_first_name" />
+  </form>
+  <div id="placeholder2" class="w3-container">
+    Placeholder for the Ajax form
+  </div>
+
+<hr>
+
+<h1>Demo 3 - Ajax Form II</h1>
+<h2>Create a new user</h2>
+<form action='/first_app/create' method='post' class='ajax_form' id='create_user_ajax_form'>
+{% csrf_token %}
+First Name: <input type="text" name="first_name"/>
+Last Name: <input type="text" name="last_name"/>
+Email: <input type="text" name="email_address"/>
+<input type="submit" value="submit"/>
+</form>
+<div id="placeholder3" class="w3-container">
+  Placeholder for the Ajax Form part II
+</div>
+<script>
+$('#create_user_ajax_form').submit(function(e){
+  e.preventDefault();
+  console.log('Sending Ajax request to', $(this).attr('action'));
+  console.log('Submiting the following data', $(this).serialize());
+  $.ajax({
+    url: $(this).attr('action'),
+    method: 'post',
+    data: $(this).serialize(),
+    success: function(serverResponse){
+      $('#placeholder3').html(serverResponse);
+    }
+  });
+});
+</script>
+  <script>
+  $('.ajax_form').submit(function(e){
+    e.preventDefault();
+  });
+  $('#ajax_first_name').keyup(function(){
+    console.log('Sending Ajax request to /first_app/find');
+    console.log('Submitting the following data', $(this).parent().serialize());
+    $.ajax({
+      url: '/first_app/find',
+      method: 'post',
+      data: $(this).parent().serialize(),
+      success: function(serverResponse){
+        $('#placeholder2').html(serverResponse);
+      }
+    });
+  });
+  </script>
+  <script>
+  $('#button_json').click(function(){
+    $.ajax({
+      url: '/first_app/all.json',
+      success: function(serverResponse){
+        console.log("Received this from server:", serverResponse);
+        console.log("Now, I can use the serverResponse to manipulate the DOM");
+        $('#placeholder1').html(JSON.stringify(serverResponse));
+      }
+    });
+  });
+  $('#button_html').click(function(){
+    $.ajax({
+      url: '/first_app/all.html',
+      success:function(serverResponse){
+        console.log('Received this from server: ', serverResponse);
+        $('#placeholder1').html(serverResponse);
+      }
+    });
+  });
+  </script>
+</body>
+</html>
