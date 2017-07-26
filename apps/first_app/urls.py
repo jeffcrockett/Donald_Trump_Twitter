@@ -8,5 +8,7 @@ urlpatterns = [
         url(r'^first_app/all.html$', views.all_html),
         url(r'^first_app/find$', views.find),
         url(r'^first_app/create$', views.create),
+        url(r'^first_app/parse$', views.parse),
+        url(r'^first_app/alltweets$', views.alltweets)
 
         ]

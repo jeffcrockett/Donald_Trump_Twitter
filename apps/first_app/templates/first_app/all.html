@@ -1,5 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
 <table>
-  {% for user in users %}
-  <tr><td>{{user.first_name}}</td><td>{{user.last_name}}</td><td>{{user.email_address}}</td></tr>
+  {% for tweet in tweets %}
+  <tr><td>{{tweet.content}}</td></tr>
 {% endfor %}
 </table>
+</body>
+</html>

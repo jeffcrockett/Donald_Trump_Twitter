@@ -8,29 +8,35 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+  <!-- <form action="first_app/parse" method="POST">
+    {% csrf_token %}
+<input type="text" name="line">
+  </form>
   <h1>Demo 1 - JSON VS HTML</h1>
   <button id="button_json" class="w3-btn">Fetch HttpResponse from user/login/all.json</button>
   <button id="button_html" class="w3-btn">Fetch HttpResponse from user/login/all.html</button>
   <div id="placeholder1" class="w3-container">Placeholder for the Ajax Response
   </div>
 
-  <hr>
+  <hr> -->
 
-  <h1>Demo 2 - Ajax Form</h1>
+
+
+  <h1>Search</h1>
   <form action="/first_app/find" method='post' class='ajax_form'>
-Find all users whose first name starts with
+Find all Trump tweets that contain the following:
 {% csrf_token %}
 <input type="text" name="first_name_starts_with" id="ajax_first_name" />
   </form>
   <div id="placeholder2" class="w3-container">
-    Placeholder for the Ajax form
+    <!-- Placeholder for the Ajax form -->
   </div>
 
 <hr>
 
-<h1>Demo 3 - Ajax Form II</h1>
+<!-- <h1>Demo 3 - Ajax Form II</h1>
 <h2>Create a new user</h2>
-<form action='/first_app/create' method='post' class='ajax_form' id='create_user_ajax_form'>
+<form action='first_app/create' method='post' class='ajax_form' id='create_user_ajax_form'>
 {% csrf_token %}
 First Name: <input type="text" name="first_name"/>
 Last Name: <input type="text" name="last_name"/>
@@ -39,7 +45,7 @@ Email: <input type="text" name="email_address"/>
 </form>
 <div id="placeholder3" class="w3-container">
   Placeholder for the Ajax Form part II
-</div>
+</div> -->
 <script>
 $('#create_user_ajax_form').submit(function(e){
   e.preventDefault();
